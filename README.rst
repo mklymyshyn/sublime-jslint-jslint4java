@@ -1,6 +1,9 @@
 JsLint Checker for Sublimt Text 2
 ====
 
+Almost whole implementation stolen from `sublimetext_python_checker <https://github.com/vorushin/sublimetext_python_checker>`_ by 
+**Roman Vorushin**
+
 *Author*: Maksym Klymyshyn
 
 *Blog*: `Django and Other <http://djangoandother.blogspot.com>`_.
