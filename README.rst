@@ -8,6 +8,9 @@ Almost whole implementation stolen from `sublimetext_python_checker <https://git
 
 *Blog*: `Django and Other <http://djangoandother.blogspot.com>`_.
 
+Changes
+============
+#. **December 10, 2011** – JsLint tool execution (*JsLint4Java*) moved to separate thread so now plugin becoming useful for daily usage
 
 Installation
 ============
