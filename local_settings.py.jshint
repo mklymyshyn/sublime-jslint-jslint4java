@@ -1,0 +1,4 @@
+
+CHECKER = "/Users/maxk/Library/Application Support/Sublime Text 2/"\
+          "Packages/sublime-jslint-jslint4java/contrib/jshint/jsc.sh"
+CHECKER_ARGS = []

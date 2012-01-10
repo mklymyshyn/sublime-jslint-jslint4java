@@ -131,6 +131,7 @@ class JslintCommand(sublime_plugin.EventListener):
                      'keyword',
                      sublime.DRAW_EMPTY | sublime.DRAW_OUTLINED)
 
+        print self.view_messages
         underlines = []
         for m in self.view_messages[id]:
             if m['col']:
@@ -159,7 +160,11 @@ def jslint_checker(id, file_name, command):
 
     # build args
     ARGS = []
-    ARGS.extend(CHECKER)
+    if isinstance(CHECKER, (list, tuple)):
+        ARGS.extend(CHECKER)
+    else:
+        ARGS.append(CHECKER)
+
     ARGS.extend(CHECKER_ARGS)
     ARGS.extend([file_name])
 
@@ -200,19 +205,23 @@ def parse_messages(checker_output):
     """
     Parse messages from JsLint
     """
-    lint = re.compile(r'.*:(\d+):(\d+):(.*)')
+    lints = [
+        re.compile(r'.*:(\d+):(\d+):(.*)'),
+        re.compile(r'(\d+),(\d+):(.*)')
+    ]
 
     messages = []
     for i, line in enumerate(checker_output.splitlines()):
-        if lint.match(line):
-            lineno, col, text = lint.match(line).groups()
-        else:
-            continue
+        for lint in lints:
+            if lint.match(line):
+                lineno, col, text = lint.match(line).groups()
 
-        messages.append({
-            'lineno': int(lineno) - 1,
-            'col': int(col) - 1,
-            'text': text
-        })
+                messages.append({
+                    'lineno': int(lineno) - 1,
+                    'col': int(col) - 1,
+                    'text': text
+                })
+            else:
+                continue
 
     return messages
